@@ -1,4 +1,4 @@
-## 🚁 Project Extension: Aerial Image Dehazing for VSAI
+## 🚁 Project Extension: Aerial Image Dehazing using VSAI
 
 This project is an extension of the original [Nonhomogeneous Image Dehazing](https://github.com/diptamath/Nonhomogeneous_Image_Dehazing.git) model.  
 We adapted and enhanced the model for aerial image dehazing in low-visibility conditions (e.g., helicopter-mounted cameras) using the **VSAI dataset**.
@@ -6,7 +6,7 @@ We adapted and enhanced the model for aerial image dehazing in low-visibility co
 ---
 
 ### 🔧 Key Modifications:
-- 📚 **Retraining**: The DMPHN-based model was retrained on the custom **VSAI dataset**, which includes aerial images under various haze conditions.
+- 📚 **Retraining**: The DMPHN-based model was retrained on the custom **VSAI dataset**, which includes aerial images in various enviroments.
 - 🌫️ **Synthetic Haze Generation**: We applied haze effects to clean aerial images using a custom script, simulating real-world atmospheric interference.
 - 🔁 **Domain Adaptation**: Training parameters and augmentation strategies were adjusted for aerial perspectives and varying altitudes.
 
@@ -15,7 +15,7 @@ We adapted and enhanced the model for aerial image dehazing in low-visibility co
 ### 📦 Added Files and Their Purpose:
 
 - `apply_haze.py`  
-  ↳ Generates synthetic haze overlays on the VSAI dataset, used to augment the training data.
+  ↳ Generates synthetic haze overlays on the VSAI dataset, used for training data.
 
 - `compile.py`  
   ↳ Compiles the trained model for deployment using **Qualcomm AI Hub**, targeting efficient edge inference.
@@ -35,7 +35,7 @@ We adapted and enhanced the model for aerial image dehazing in low-visibility co
   📦 Contains our **own trained model weights** and intermediate checkpoints from the retraining on the VSAI dataset.
 
 - `checkpoints3/`  
-  📥 Stores the **original pre-trained model** used as a baseline before fine-tuning.
+  📥 Stores the **original pre-trained model**.
 
 ---
 
