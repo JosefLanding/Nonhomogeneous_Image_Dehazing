@@ -32,26 +32,28 @@ def save_images(images, name):
 def main():
     print("init data folders")
 
-    encoder_lv1 = models.Encoder().cuda(GPU) 
-    encoder_lv2 = models.Encoder().cuda(GPU) 
-    encoder_lv3 = models.Encoder().cuda(GPU) 
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    decoder_lv1 = models.Decoder().cuda(GPU) 
-    decoder_lv2 = models.Decoder().cuda(GPU)     
-    decoder_lv3 = models.Decoder().cuda(GPU) 
+    encoder_lv1 = models.Encoder().to(device) 
+    encoder_lv2 = models.Encoder().to(device) 
+    encoder_lv3 = models.Encoder().to(device) 
+
+    decoder_lv1 = models.Decoder().to(device) 
+    decoder_lv2 = models.Decoder().to(device)     
+    decoder_lv3 = models.Decoder().to(device) 
 
 
 
     # LOAD models here 
 
     saved_epoch = 130
-    encoder_lv1.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_encoder_lv1.pkl")))
-    encoder_lv2.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_encoder_lv2.pkl")))
-    encoder_lv3.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_encoder_lv3.pkl")))
+    encoder_lv1.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_encoder_lv1.pkl"), map_location=torch.device('cpu')))
+    encoder_lv2.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_encoder_lv2.pkl"), map_location=torch.device('cpu')))
+    encoder_lv3.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_encoder_lv3.pkl"), map_location=torch.device('cpu')))
 
-    decoder_lv1.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_decoder_lv1.pkl")))
-    decoder_lv2.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_decoder_lv2.pkl")))
-    decoder_lv3.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_decoder_lv3.pkl")))
+    decoder_lv1.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_decoder_lv1.pkl"), map_location=torch.device('cpu')))
+    decoder_lv2.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_decoder_lv2.pkl"), map_location=torch.device('cpu')))
+    decoder_lv3.load_state_dict(torch.load(str('./checkpoints2/' + METHOD + "/ep" + str(saved_epoch)+ "_decoder_lv3.pkl"), map_location=torch.device('cpu')))
     
 
     os.makedirs('./test_results/' + EXPDIR, exist_ok = True)
@@ -63,7 +65,7 @@ def main():
         # print (images_name )
         with torch.no_grad():             
             images_lv1 = transforms.ToTensor()(Image.open(SAMPLE_DIR + '/' + images_name).convert('RGB'))
-            images_lv1 = Variable(images_lv1 - 0.5).unsqueeze(0).cuda(GPU)
+            images_lv1 = Variable(images_lv1 - 0.5).unsqueeze(0).to(device)
 
             start = time.time()
             H = images_lv1.size(2)

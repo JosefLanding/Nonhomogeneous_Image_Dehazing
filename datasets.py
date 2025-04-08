@@ -33,9 +33,21 @@ class NH_HazeDataset(Dataset):
         return len(self.hazed_image_files)
 
     def __getitem__(self, idx):
-        image_name = self.hazed_image_files[idx][0:-1].split('/')
-        hazed_image = Image.open(os.path.join(self.root_dir, image_name[0], image_name[1], image_name[2])).convert('RGB')
-        dehazed_image = Image.open(os.path.join(self.root_dir, image_name[0], 'GT', image_name[2])).convert('RGB')  # change the filename
+
+        hazy_image_path = os.path.join(self.root_dir, self.hazed_image_files[idx].strip())
+        dehazed_image_path = os.path.join(self.root_dir, self.dehazed_image_files[idx].strip())
+
+        print("Hazy Image Path:", hazy_image_path)  # Debugging line
+        print("GT Image Path:", dehazed_image_path)  # Debugging line
+
+        hazed_image = Image.open(hazy_image_path).convert('RGB')
+        dehazed_image = Image.open(dehazed_image_path).convert('RGB')
+
+
+
+        # image_name = self.hazed_image_files[idx][0:-1].split('/')
+        # hazed_image = Image.open(os.path.join(self.root_dir, image_name[0], image_name[1], image_name[2])).convert('RGB')
+        # dehazed_image = Image.open(os.path.join(self.root_dir, image_name[0], 'GT', image_name[2])).convert('RGB')  # change the filename
         
         if self.rotation:
             degree = random.choice([90, 180, 270])

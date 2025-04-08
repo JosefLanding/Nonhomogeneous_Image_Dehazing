@@ -1,7 +1,8 @@
 import torch
 from torch import nn
 from torchvision.models.vgg import vgg16
-from skimage.measure import compare_psnr, compare_ssim
+from skimage.metrics import peak_signal_noise_ratio as compare_psnr
+from skimage.metrics import structural_similarity as compare_ssim
 import pytorch_ssim
 from torch.autograd import Variable
 

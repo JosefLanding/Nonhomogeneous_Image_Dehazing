@@ -1,0 +1,11 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.tflite
+*.onnx
+*.mp4
+*.jpg
+*.png"

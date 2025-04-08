@@ -1,3 +1,58 @@
+## 🚁 Project Extension: Aerial Image Dehazing for VSAI
+
+This project is an extension of the original [Nonhomogeneous Image Dehazing](https://github.com/diptamath/Nonhomogeneous_Image_Dehazing.git) model.  
+We adapted and enhanced the model for aerial image dehazing in low-visibility conditions (e.g., helicopter-mounted cameras) using the **VSAI dataset**.
+
+---
+
+### 🔧 Key Modifications:
+- 📚 **Retraining**: The DMPHN-based model was retrained on the custom **VSAI dataset**, which includes aerial images under various haze conditions.
+- 🌫️ **Synthetic Haze Generation**: We applied haze effects to clean aerial images using a custom script, simulating real-world atmospheric interference.
+- 🔁 **Domain Adaptation**: Training parameters and augmentation strategies were adjusted for aerial perspectives and varying altitudes.
+
+---
+
+### 📦 Added Files and Their Purpose:
+
+- `apply_haze.py`  
+  ↳ Generates synthetic haze overlays on the VSAI dataset, used to augment the training data.
+
+- `compile.py`  
+  ↳ Compiles the trained model for deployment using **Qualcomm AI Hub**, targeting efficient edge inference.
+
+- `convert.py`  
+  ↳ Converts the PyTorch-trained model to **ONNX** format for compatibility across platforms.
+
+- `quantize_and_profile_test.py`  
+  ↳ Performs **quantization** and **inference profiling** for edge deployment evaluation.  
+  🔹 *Note: This is not the final quantized version used in the final model.*
+
+---
+
+### 📁 Folder Overview
+
+- `checkpoints/`  
+  📦 Contains our **own trained model weights** and intermediate checkpoints from the retraining on the VSAI dataset.
+
+- `checkpoints3/`  
+  📥 Stores the **original pre-trained model** used as a baseline before fine-tuning.
+
+---
+
+### 📸 Real-World Use Case
+
+This enhanced version is designed for **real-time dehazing in aerial systems**, such as drones and helicopters.  
+It improves visibility in scenarios like **surveillance**, **search-and-rescue**, and **navigation** under foggy or hazy conditions.
+
+---
+
+### 🙏 Credits
+
+Built upon the original [Nonhomogeneous Image Dehazing](https://github.com/diptamath/Nonhomogeneous_Image_Dehazing.git) repository.  
+All modifications and experiments were conducted as part of a university project for the course **Intelligent Systems**.
+
+
+
 # Fast Deep Multi-patch Hierarchical Network for Nonhomogeneous Image Dehazing
 The code for implementing the "Fast Deep Multi-patch Hierarchical Network for Nonhomogeneous Image Dehazing" (Accepted at NTIRE Workshop, CVPR 2020).
 
